@@ -11,7 +11,6 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 
 /**
- * @author mayongbin01
  *         <p>
  *         Created by mayongbin01 on 2017/1/18.
  *         <p>

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.baidu.serivce.UpdateServerInfosService;
 
 /**
- * @author mayongbin01
  *         <p>
  *         regular tasks:
  *         update db serverInfo for each server

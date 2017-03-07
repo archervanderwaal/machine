@@ -114,8 +114,8 @@ public class Server implements Serializable {
 
     @Override
     public String toString() {
-        return "Server[id: " + id + ", destIp: " + destIp +
-                ", destLoginname: " + destLoginname + ", destPassword: "
+        return "Server[id: " + id + ", destIp: " + destIp + ", destLoginname: "
+                + destLoginname + ", destPassword: "
                 + destPassword + ", destType: " + destType + ", destPort"
                 + destPort + " " + this.getServerInfos().toString() + " ]";
     }

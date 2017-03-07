@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baidu.dal.model.Server;
 
 /**
- * @author mayongbin01
- *         Created by mayongbin01 on 2017/1/17.
+ * <p>Created by mayongbin01 on 2017/1/17.</p>
  */
 @Repository
 public interface ServerRepository extends JpaRepository<Server, Integer>,

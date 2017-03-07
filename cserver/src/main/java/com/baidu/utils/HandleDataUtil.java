@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.baidu.dal.model.ServerInfo;
 
 /**
- * @author mayongbin01
  *         <p>
  *         Created by mayongbin01 on 2017/1/18.
  *         <p>

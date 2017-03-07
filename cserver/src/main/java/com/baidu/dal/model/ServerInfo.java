@@ -7,8 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * @author mayongbin01
- *         Created by mayongbin01 on 2017/1/17.
+ *  <p> Created by mayongbin01 on 2017/1/17.</p>
  */
 @Entity
 public class ServerInfo implements Serializable, Comparable<ServerInfo> {
