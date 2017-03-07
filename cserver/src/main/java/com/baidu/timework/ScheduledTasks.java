@@ -9,15 +9,13 @@ import org.springframework.stereotype.Component;
 import com.baidu.serivce.UpdateServerInfosService;
 
 /**
- * @author mayongbin01
  *         <p>
- *         Created by mayongbin01 on 2017/1/23.
+ *         Created by mayongbin01 on 2017/1/23.</p>
  */
 
 @Component
 public class ScheduledTasks {
 
-    //logging
     private static Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
     @Autowired
     private UpdateServerInfosService updateServerInfosService;

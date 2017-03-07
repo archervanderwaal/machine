@@ -4,9 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * @author mayongbin01
  *         <p>
- *         Created by mayongbin01 on 2017/1/23.
+ *         Created by mayongbin01 on 2017/1/23.</p>
  */
 public class TimerManger {
 
@@ -19,7 +18,6 @@ public class TimerManger {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
-        //the first time that execute timer work
         Date date = calendar.getTime();
     }
 }

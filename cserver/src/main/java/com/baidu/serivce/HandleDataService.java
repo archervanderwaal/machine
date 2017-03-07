@@ -22,7 +22,6 @@ import com.baidu.utils.HandleDataUtil;
 @Service
 public class HandleDataService {
 
-    //handleDataUtil
     @Autowired
     private HandleDataUtil handleDataUtil;
 

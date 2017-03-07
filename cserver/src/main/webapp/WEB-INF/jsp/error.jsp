@@ -86,8 +86,7 @@
 <h1>error message! <span>:(</span></h1>
 <p>${errorMessage}</p>
 <ul>
-    <li>please check out your loginname and password</li>
-    <li>try again later</li>
+    <li>please check out. try again later</li>
 </ul>
 </body>
 </html>

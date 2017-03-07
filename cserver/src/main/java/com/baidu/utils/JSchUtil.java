@@ -20,10 +20,8 @@ import com.jcraft.jsch.UserInfo;
 @Component
 public class JSchUtil {
 
-    //logging
     private static Logger logger = LoggerFactory.getLogger(JSchUtil.class);
 
-    //statement jsch object
     private static JSch jSch = new JSch();
 
     /**
@@ -39,14 +37,10 @@ public class JSchUtil {
     public Session createSession(String destIp, String destUsername, String destPassword, int destPort)
             throws JSchException {
 
-        //statement a session for server
         Session session;
 
         session = jSch.getSession(destUsername, destIp, destPort);
-
-        assert session != null;
         session.setPassword(destPassword);
-        //set userInfo for session
         session.setUserInfo(new UserInfo() {
             @Override
             public String getPassphrase() {

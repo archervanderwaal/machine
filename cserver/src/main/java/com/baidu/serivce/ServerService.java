@@ -13,7 +13,6 @@ import com.baidu.dal.dao.ServerRepository;
 import com.baidu.dal.model.Server;
 
 /**
- * @author mayongbin01
  *         <p>
  *         create by mayongbin01 2017/01/22
  *         <p>
@@ -24,7 +23,6 @@ import com.baidu.dal.model.Server;
 @Service
 public class ServerService {
 
-    //logging
     private static Logger logger = LoggerFactory.getLogger(ServerService.class);
 
     @Autowired
@@ -41,7 +39,6 @@ public class ServerService {
     public List<Server> findAllServers() {
         List<Server> servers = serverRepository.findAll();
 
-        //sort the serverInfo by name
         for (Server server : servers) {
             Collections.sort(server.getServerInfos());
         }
@@ -58,11 +55,9 @@ public class ServerService {
      */
     public Server addServer(Server server) {
 
-        //logging
         logger.info("add server, the server is - " + ReflectionToStringBuilder.
                 toString(server));
 
-        //save server to db
         return serverRepository.save(server);
     }
 
@@ -88,7 +83,6 @@ public class ServerService {
         logger.info("destType is : " + destType);
         List<Server> servers = serverRepository.findByDestType(destType);
 
-        //sort by serivce name
         for (Server server : servers) {
             Collections.sort(server.getServerInfos());
         }
@@ -113,7 +107,6 @@ public class ServerService {
      * @param destIp
      */
     public void deleteServerByDestIp(String destIp) {
-        //get server by destIp
         Server server = serverRepository.findByDestIp(destIp);
 
         serverRepository.delete(server.getId());

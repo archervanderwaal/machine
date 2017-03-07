@@ -13,15 +13,21 @@ import javax.persistence.Id;
 @Entity
 public class ServerInfo implements Serializable, Comparable<ServerInfo> {
 
-    //唯一标识
+    /**
+     * id
+     */
     @Id
     @GeneratedValue
     private int id;
 
-    //服务名称
+    /**
+     * service name
+     */
     private String serviceName;
 
-    //项目名称
+    /**
+     * service content
+     */
     private String content;
 
     public ServerInfo() {

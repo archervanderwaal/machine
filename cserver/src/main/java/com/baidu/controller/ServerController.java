@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,40 +22,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.baidu.dal.model.Server;
 import com.baidu.exception.ConnectSessionFailedException;
 import com.baidu.exception.CreateSessionFailedException;
+import com.baidu.exception.HostNameExistException;
 import com.baidu.serivce.ExecuteShellService;
 import com.baidu.serivce.HandleDataService;
 import com.baidu.serivce.ServerService;
 import com.baidu.serivce.UpdateServerInfosService;
 
 /**
- * @author mayongbin01
  *         <p>
  *         Created by mayongbin01 on 2017/1/17.
  *         <p>
  *         controller
  *         <p>
- *         process business logic
+ *         process business logic.
  */
 @Controller
 @RequestMapping("/")
 public class ServerController {
 
-    //logging
     private static Logger logger = LoggerFactory.getLogger(ServerController.class);
 
-    //serverService
     @Autowired
     private ServerService serverService;
 
-    //executeShellService
     @Autowired
     private ExecuteShellService executeShellService;
 
-    //handleDataService
     @Autowired
     private HandleDataService handleDataService;
 
-    //updateServerInfosService
     @Autowired
     private UpdateServerInfosService updateServerInfosService;
 
@@ -68,13 +64,19 @@ public class ServerController {
      * @return
      */
     @GetMapping("/servers")
-    public String serverList(Model model) {
-
-        ArrayList<Server> servers = (ArrayList<Server>) serverService.findAllServers();
-
-        //add attribute to model
+    public String serverList(Model model, HttpSession session) {
+        List<Server> servers = serverService.findAllServers();
+        List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
+        if (!CollectionUtils.isEmpty(canNotConnectServers)) {
+            for (Server server : canNotConnectServers) {
+                if (!CollectionUtils.isEmpty(servers)) {
+                    if (servers.contains(server)) {
+                        servers.remove(server);
+                    }
+                }
+            }
+        }
         model.addAttribute("servers", servers);
-
         return "index";
     }
 
@@ -92,7 +94,6 @@ public class ServerController {
 
         Server server = serverService.findOneServerById(id);
 
-        //add attribute to model
         model.addAttribute("server", server);
 
         return "serverinfo";
@@ -112,47 +113,36 @@ public class ServerController {
      */
     @PostMapping("/server/add")
     public String addServer(@ModelAttribute Server server, Model model)
-            throws CreateSessionFailedException, ConnectSessionFailedException {
+            throws CreateSessionFailedException, ConnectSessionFailedException, HostNameExistException {
         logger.info(ReflectionToStringBuilder.toString(server));
-
-        //determine whether the server can connect
+        if (serverService.findServerByIp(server.getDestIp()) != null) {
+            model.addAttribute("errorMessage", "the " + server.getDestIp() + " has existed.");
+            return "error";
+        }
         try {
-            //execute shell and set serverInfos to server property
             server.setServerInfos(handleDataService.handleData(
                     executeShellService.executeShell(server)
             ));
 
         } catch (CreateSessionFailedException e) {
-            //create session failed
-            //logging
             logger.warn("CreateSessionFailedException " + e.toString());
-            //add errorMessage to model
             model.addAttribute("errorMessage", "please provide correct server's ip loginname, password,"
                     + " and server's prot！");
-            //error.jsp and errorMessage
             return "error";
 
         } catch (ConnectSessionFailedException e) {
-            //connect session failed
-            //logging
             logger.warn("ConnectSessionFailedException " + e.toString());
-            //add errorMessage to model
             model.addAttribute("errorMessage", "connect server <em>failed</em>!"
                     + " maybe username or password is incorrent!");
-            //error.jsp and errorMessage
             return "error";
         } catch (RuntimeException e) {
-            //IoException
-            //logging
             logger.warn("RuntimeException " + e.toString());
             model.addAttribute("errorMessage", "server has a <em>error</em>！");
-            //error.jsp view
             return "error";
         }
 
         if ((server = serverService.addServer(server)) == null) {
             model.addAttribute("errorMessage", "server has a <em>error</em>！");
-            //error.jsp
             return "error";
         } else {
             return "redirect:/server/" + server.getId();
@@ -169,7 +159,6 @@ public class ServerController {
      */
     @GetMapping("/server/add")
     public String addServer() {
-        //return add.jsp
         return "add";
     }
 
@@ -184,14 +173,20 @@ public class ServerController {
      * @return
      */
     @GetMapping("/server")
-    public String getServerByDestType(@RequestParam String destType, Model model) {
-        //get server by destType
+    public String getServerByDestType(@RequestParam String destType, Model model, HttpSession session) {
         ArrayList<Server> servers = (ArrayList<Server>) serverService.getServerByDestType(destType);
-
-        //add attribute to model
+        List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
+        if (!CollectionUtils.isEmpty(canNotConnectServers) && !CollectionUtils.isEmpty(servers)) {
+            for (Server server : canNotConnectServers) {
+                if (!servers.contains(server)) {
+                    canNotConnectServers.remove(server);
+                } else {
+                    servers.remove(server);
+                }
+            }
+        }
         model.addAttribute("servers", servers);
-
-        //index.jsp
+        session.setAttribute("failServers", canNotConnectServers);
         return "index";
     }
 
@@ -207,10 +202,14 @@ public class ServerController {
      * @return
      */
     @GetMapping("/server/delete/{id}")
-    public String deleteServer(@PathVariable int id) {
-        //delete server by id
+    public String deleteServer(@PathVariable int id, HttpSession session, Model model) {
+        Server server = serverService.findOneServerById(id);
         serverService.deleteServer(id);
-        //return index.jsp view
+        List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
+        if (canNotConnectServers.contains(server)) {
+            canNotConnectServers.remove(server);
+        }
+        session.setAttribute("failServers", canNotConnectServers);
         return "redirect:/servers";
     }
 
@@ -220,12 +219,11 @@ public class ServerController {
      * @return
      */
     @RequestMapping("/servers/update")
-    public String updateServers(Model model, HttpSession session) {
+    public String updateServers(HttpSession session, Model model) {
 
         List<Server> canNotConnectServers = updateServerInfosService.autoUpdate();
-        model.addAttribute("servers", serverService.findAllServers());
-        model.addAttribute("FailServers", canNotConnectServers);
-        return "index";
+        session.setAttribute("failServers", canNotConnectServers);
+        return "redirect:/servers";
     }
 
     /**
@@ -245,14 +243,19 @@ public class ServerController {
     }
 
     @RequestMapping("/server/edit")
-    public String editServer(Model model, @ModelAttribute Server server) {
-        //修改服务器信息
+    public String editServer(Model model, @ModelAttribute Server server, HttpSession session) {
+        List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
+        /*update server*/
         Server s = serverService.findServerByIp(server.getDestIp());
         s.setDestPassword(server.getDestPassword());
         s.setDestLoginname(server.getDestLoginname());
         s.setDestType(server.getDestType());
         s.setDestPort(server.getDestPort());
-        serverService.addServer(s);
+        Server server1 = serverService.addServer(s);
+        if (canNotConnectServers.contains(s)) {
+            canNotConnectServers.remove(s);
+            canNotConnectServers.add(server1);
+        }
         return "redirect:/servers";
     }
 }

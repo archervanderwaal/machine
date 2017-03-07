@@ -183,7 +183,7 @@
         </div>
     </div>
 </div>
-<c:if test="${FailServers != null}">
+<c:if test="${!empty failServers}">
     <h5 align="center">已断开的服务器列表</h5>
     <br>
     <div class="container">
@@ -220,7 +220,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="server" items="${FailServers}">
+                    <c:forEach var="server" items="${failServers}">
                         <tr class="info">
                             <td>${server.destIp}</td>
                             <c:choose>

@@ -20,27 +20,38 @@ import javax.persistence.OneToMany;
 @Entity
 public class Server implements Serializable {
 
-    //服务器id
+    /**
+     * id
+     */
     @Id
     @GeneratedValue
     private int id;
 
-    //远程服务器ip
+    /**
+     * dest ip
+     */
     private String destIp;
 
-    //远程服务器登陆名
+    /**
+     * login name
+     */
     private String destLoginname;
 
-    //远程服务器登陆密码
+    /**
+     * password
+     */
     private String destPassword;
 
-    //远程服务器的类型
+    /**
+     * dest type
+     */
     private String destType;
 
-    //远程登陆端口
+    /**
+     * port
+     */
     private int destPort;
 
-    //一对多的映射
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "server_id")
     private List<ServerInfo> serverInfos = new ArrayList<>();
@@ -107,5 +118,22 @@ public class Server implements Serializable {
                 ", destLoginname: " + destLoginname + ", destPassword: "
                 + destPassword + ", destType: " + destType + ", destPort"
                 + destPort + " " + this.getServerInfos().toString() + " ]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Server)) {
+            return false;
+        }
+
+        Server server = (Server) o;
+
+        if (getId() == server.getId()) {
+            return true;
+        }
+        return false;
     }
 }

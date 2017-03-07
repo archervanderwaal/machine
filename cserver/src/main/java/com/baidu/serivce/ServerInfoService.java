@@ -9,7 +9,6 @@ import com.baidu.dal.dao.ServerInfoRepository;
 import com.baidu.dal.model.ServerInfo;
 
 /**
- * @author mayongbin01
  *         <p>
  *         create by mayongbin01 2017/01/22
  *         <p>
@@ -20,7 +19,6 @@ import com.baidu.dal.model.ServerInfo;
 @Service
 public class ServerInfoService {
 
-    //get log
     private static Logger logger = LoggerFactory.getLogger(ServerInfoService.class);
 
     @Autowired
