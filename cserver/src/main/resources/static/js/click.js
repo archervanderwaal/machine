@@ -22,6 +22,6 @@ $("#server_type").click(function () {
     var destType = $("#server_type option:selected").val();
 
     xmlHttp = createXMLHttpRequest();
-    var url = "/machine/server?destType="+destType;
+    var url = "/machine/server?destType=" + destType;
     xmlHttp.open("GET", url, false);// 同步处理
 });

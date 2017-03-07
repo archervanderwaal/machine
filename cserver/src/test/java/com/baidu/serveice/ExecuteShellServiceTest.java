@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -13,7 +12,7 @@ import com.baidu.dal.model.Server;
 import com.baidu.serivce.ExecuteShellService;
 
 /**
- *  <p>Created by mayongbin01 on 2017/1/16.</p>
+ * <p>Created by mayongbin01 on 2017/1/16.</p>
  *
  * @author mayongbin01
  */
@@ -35,8 +34,8 @@ public class ExecuteShellServiceTest {
 
         //ArrayList<String> stdout = executeShellService.executeShell(server);
 
-//        for (String str : stdout) {
-//            System.out.println(str);
-//        }
+        //        for (String str : stdout) {
+        //            System.out.println(str);
+        //        }
     }
 }

@@ -12,7 +12,7 @@
     }
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -83,11 +83,11 @@
     </style>
 </head>
 <body>
-    <h1>error message! <span>:(</span></h1>
-    <p>${errorMessage}</p>
-    <ul>
-        <li>please check out your loginname and password</li>
-        <li>try again later</li>
-    </ul>
+<h1>error message! <span>:(</span></h1>
+<p>${errorMessage}</p>
+<ul>
+    <li>please check out your loginname and password</li>
+    <li>try again later</li>
+</ul>
 </body>
 </html>

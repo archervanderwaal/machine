@@ -13,9 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 /**
- *  <p>Created by mayongbin01 on 2017/1/17.</p>
+ * <p>Created by mayongbin01 on 2017/1/17.</p>
  *
- *  @author mayongbin01
+ * @author mayongbin01
  */
 @Entity
 public class Server implements Serializable {

@@ -12,7 +12,7 @@
     }
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -25,7 +25,7 @@
     <script type="text/javascript"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.0.1/js/button.js"></script>
     <style type="text/css">
-        #form1{
+        #form1 {
             width: 800px;
         }
     </style>
@@ -49,14 +49,14 @@
                     <label for="loginName" class="col-sm-2 control-label">登录名</label>
                     <div class="col-sm-10">
                         <input type="text" name="destLoginname" class="form-control" id="loginName"
-                               value="${server.destLoginname}" readonly />
+                               value="${server.destLoginname}" readonly/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
                         <input type="password" name="destPassword" class="form-control" id="password"
-                               value="${server.destPassword}" />
+                               value="${server.destPassword}"/>
                     </div>
                 </div>
                 <div class="form-group">

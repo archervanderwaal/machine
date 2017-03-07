@@ -8,11 +8,11 @@ import com.baidu.serivce.UpdateServerInfosService;
 
 /**
  * @author mayongbin01
- *
- * regular tasks:
- * update db serverInfo for each server
- *
- * Created by mayongbin01 on 2017/1/22.
+ *         <p>
+ *         regular tasks:
+ *         update db serverInfo for each server
+ *         <p>
+ *         Created by mayongbin01 on 2017/1/22.
  */
 public class TimeWork extends TimerTask {
 

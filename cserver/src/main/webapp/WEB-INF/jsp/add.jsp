@@ -12,7 +12,7 @@
     }
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -25,7 +25,7 @@
     <script type="text/javascript"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.0.1/js/button.js"></script>
     <style type="text/css">
-        #form1{
+        #form1 {
             width: 800px;
         }
     </style>
@@ -41,19 +41,19 @@
                 <div class="form-group">
                     <label for="hostAddress" class="col-sm-2 control-label">远程服务器地址</label>
                     <div class="col-sm-10">
-                        <input type="text" name="destIp" class="form-control" id="hostAddress" />
+                        <input type="text" name="destIp" class="form-control" id="hostAddress"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="loginName" class="col-sm-2 control-label">登录名</label>
                     <div class="col-sm-10">
-                        <input type="text" name="destLoginname" class="form-control" id="loginName" />
+                        <input type="text" name="destLoginname" class="form-control" id="loginName"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" name="destPassword" class="form-control" id="password" />
+                        <input type="password" name="destPassword" class="form-control" id="password"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -87,9 +87,9 @@
 <script type="text/javascript">
     function isTrue() {
         if (document.getElementById("hostAddress").value == "" ||
-        document.getElementById("loginName").value == "" ||
-        document.getElementById("password").value == "" ||
-        document.getElementById("port").value == "") {
+            document.getElementById("loginName").value == "" ||
+            document.getElementById("password").value == "" ||
+            document.getElementById("port").value == "") {
             alert("请填写完整!");
             return false;
         } else {

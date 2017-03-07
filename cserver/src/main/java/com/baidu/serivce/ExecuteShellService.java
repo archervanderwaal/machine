@@ -23,24 +23,16 @@ import com.jcraft.jsch.Session;
 
 /**
  * @author mayongbin01
- *
- * create by mayongbin01 2017/01/22
- *
- * Service, in order to execute shell for server
- *
- * provide interface for controller
+ *         <p>
+ *         create by mayongbin01 2017/01/22
+ *         <p>
+ *         Service, in order to execute shell for server
+ *         <p>
+ *         provide interface for controller
  */
 @Service
 public class ExecuteShellService {
 
-    //get log
-    private static Logger logger = LoggerFactory.getLogger(ExecuteShellService.class);
-
-    @Autowired
-    private JSchUtil jSchUtil;
-
-    @Autowired
-    private HandleDataUtil handleDataUtil;
     //command
     private static final String commands = ""
             + "echo tomcat;"
@@ -53,7 +45,12 @@ public class ExecuteShellService {
             + "ps -ef|grep redis;"
             + "echo solr;"
             + "ps -ef|grep solr;";
-
+    //get log
+    private static Logger logger = LoggerFactory.getLogger(ExecuteShellService.class);
+    @Autowired
+    private JSchUtil jSchUtil;
+    @Autowired
+    private HandleDataUtil handleDataUtil;
 
     /**
      * connect server to execute command
@@ -62,7 +59,7 @@ public class ExecuteShellService {
      *
      * @return
      */
-    public  ArrayList<String> executeShell(Server server)
+    public ArrayList<String> executeShell(Server server)
             throws CreateSessionFailedException, ConnectSessionFailedException {
 
         logger.info(

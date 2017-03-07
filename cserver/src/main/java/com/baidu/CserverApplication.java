@@ -15,29 +15,29 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class CserverApplication extends SpringBootServletInitializer {
 
-	@Bean
-	public EmbeddedServletContainerCustomizer containerCustomizer() {
+    public static void main(String[] args) {
+        SpringApplication.run(CserverApplication.class, args);
+    }
 
-		return new EmbeddedServletContainerCustomizer() {
-			@Override
-			public void customize(ConfigurableEmbeddedServletContainer container) {
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
 
-				//(HttpStatus.UNAUTHORIZED, "/401.html"
-				ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/401.html");
-				ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
-				ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500.html");
+        return new EmbeddedServletContainerCustomizer() {
+            @Override
+            public void customize(ConfigurableEmbeddedServletContainer container) {
 
-				container.addErrorPages(error401Page, error404Page, error500Page);
-			}
-		};
-	}
+                //(HttpStatus.UNAUTHORIZED, "/401.html"
+                ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/401.html");
+                ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
+                ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/500.html");
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(CserverApplication.class);
-	}
+                container.addErrorPages(error401Page, error404Page, error500Page);
+            }
+        };
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(CserverApplication.class, args);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(CserverApplication.class);
+    }
 }

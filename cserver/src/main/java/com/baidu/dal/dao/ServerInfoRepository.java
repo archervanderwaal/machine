@@ -1,6 +1,5 @@
 package com.baidu.dal.dao;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,8 +12,8 @@ import com.baidu.dal.model.ServerInfo;
 @Repository
 public interface ServerInfoRepository extends JpaRepository<ServerInfo, Integer> {
 
-//    @Modifying
-//    @Transactional
-//    @Query(name = "delete from ServerInfo s_i where s_i.server_id = ?1")
-//    int deleteByServerId(int serverId);
+    //    @Modifying
+    //    @Transactional
+    //    @Query(name = "delete from ServerInfo s_i where s_i.server_id = ?1")
+    //    int deleteByServerId(int serverId);
 }

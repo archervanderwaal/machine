@@ -3,7 +3,6 @@ package com.baidu.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.JSch;
@@ -31,11 +30,8 @@ public class JSchUtil {
      * Create a Session
      *
      * @param destIp
-     *
      * @param destUsername
-     *
      * @param destPassword
-     *
      * @param destPort
      *
      * @return
@@ -89,7 +85,6 @@ public class JSchUtil {
      * create a specified session
      *
      * @param session
-     *
      * @param type
      *
      * @return

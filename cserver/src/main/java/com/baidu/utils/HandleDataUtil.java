@@ -25,7 +25,7 @@ public class HandleDataUtil {
     /**
      * handle execute shell result data , and
      * save information into List<ServerInfo>
-     *     collection</>
+     * collection</>
      *
      * @param stdout
      */

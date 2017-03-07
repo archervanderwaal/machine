@@ -26,7 +26,8 @@
             margin-left: 15px;
             margin-top: 30px;
         }
-        #img1{
+
+        #img1 {
             width: 30px;
             height: 30px;
         }
@@ -47,7 +48,7 @@
             </div>
             <br><br>
             <a href="<%=path%>servers" style="margin-left: 0px"></a>
-            <div class="container" >
+            <div class="container">
                 <div class="row clearfix">
                     <div class="col-md-12 column">
                         <p>
@@ -71,7 +72,7 @@
                             </div>
                             <c:forEach items="${server.serverInfos}" var="serverInfo">
                                 <div class="panel-footer">
-                                    ${serverInfo.serviceName}：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${serverInfo.content}
+                                        ${serverInfo.serviceName}：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${serverInfo.content}
                                 </div>
                             </c:forEach>
                         </div>

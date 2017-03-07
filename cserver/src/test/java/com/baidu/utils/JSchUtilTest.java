@@ -19,7 +19,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 /**
- *  <p>Created by mayongbin01 on 2017/1/16.</p>
+ * <p>Created by mayongbin01 on 2017/1/16.</p>
  *
  * @author mayongbin01
  */

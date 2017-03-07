@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +20,7 @@ import com.baidu.dal.model.Server;
 import com.baidu.dal.model.ServerInfo;
 
 /**
- *  <p>Created by mayongbin01 on 2017/1/16.</p>
+ * <p>Created by mayongbin01 on 2017/1/16.</p>
  *
  * @author mayongbin01
  */
@@ -32,10 +29,9 @@ import com.baidu.dal.model.ServerInfo;
 @SpringApplicationConfiguration(classes = CserverApplication.class)
 public class ServerRepositoryTest {
 
+    private static Logger logger = LoggerFactory.getLogger(ServerRepositoryTest.class);
     @Resource
     private ServerRepository serverRepository;
-
-    private static Logger logger = LoggerFactory.getLogger(ServerRepositoryTest.class);
 
     @Test
     public void test() {
@@ -51,7 +47,6 @@ public class ServerRepositoryTest {
     public void updateServer() {
         serverRepository.updateDestType("0", 3);
     }
-
 
     @Test
     public void setServer() {
