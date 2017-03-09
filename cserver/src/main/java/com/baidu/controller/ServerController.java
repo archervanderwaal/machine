@@ -63,7 +63,7 @@ public class ServerController {
      *
      * @return
      */
-    @GetMapping("/servers")
+    @RequestMapping("/servers")
     public String serverList(Model model, HttpSession session) {
         List<Server> servers = serverService.findAllServers();
         List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
@@ -206,8 +206,10 @@ public class ServerController {
         Server server = serverService.findOneServerById(id);
         serverService.deleteServer(id);
         List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
-        if (canNotConnectServers.contains(server)) {
-            canNotConnectServers.remove(server);
+        if (!CollectionUtils.isEmpty(canNotConnectServers)) {
+            if (canNotConnectServers.contains(server)) {
+                canNotConnectServers.remove(server);
+            }
         }
         session.setAttribute("failServers", canNotConnectServers);
         return "redirect:/servers";
@@ -247,14 +249,18 @@ public class ServerController {
         List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
         /*update server*/
         Server s = serverService.findServerByIp(server.getDestIp());
-        s.setDestPassword(server.getDestPassword());
-        s.setDestLoginname(server.getDestLoginname());
-        s.setDestType(server.getDestType());
-        s.setDestPort(server.getDestPort());
+        if (s != null) {
+            s.setDestPassword(server.getDestPassword());
+            s.setDestLoginname(server.getDestLoginname());
+            s.setDestType(server.getDestType());
+            s.setDestPort(server.getDestPort());
+        }
         Server server1 = serverService.addServer(s);
-        if (canNotConnectServers.contains(s)) {
-            canNotConnectServers.remove(s);
-            canNotConnectServers.add(server1);
+        if (!CollectionUtils.isEmpty(canNotConnectServers)) {
+            if (canNotConnectServers.contains(s)) {
+                canNotConnectServers.remove(s);
+                canNotConnectServers.add(server1);
+            }
         }
         return "redirect:/servers";
     }
