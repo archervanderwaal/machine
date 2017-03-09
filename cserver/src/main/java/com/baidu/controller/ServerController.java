@@ -242,7 +242,7 @@ public class ServerController {
         return "editor";
     }
 
-    @RequestMapping("/server/edit")
+    @PostMapping(value = "/server/edit")
     public String editServer(Model model, @ModelAttribute Server server, HttpSession session) {
         List<Server> canNotConnectServers = (List<Server>) session.getAttribute("failServers");
         /*update server*/

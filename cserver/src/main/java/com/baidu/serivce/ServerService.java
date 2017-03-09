@@ -55,8 +55,8 @@ public class ServerService {
      */
     public Server addServer(Server server) {
 
-        logger.info("add server, the server is - " + ReflectionToStringBuilder.
-                toString(server));
+        logger.info("add server, the server is - " + ReflectionToStringBuilder
+                .toString(server));
 
         return serverRepository.save(server);
     }

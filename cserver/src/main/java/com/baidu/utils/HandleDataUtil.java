@@ -41,7 +41,7 @@ public class HandleDataUtil {
 
         for (String string : stdout) {
             string = string.replaceAll(" +", " ");
-            if (!string.contains(" ")) { //tomcat mysql negix redis solr
+            if (!string.contains(" ")) {
                 key = string;
             } else {
                 if (!string.contains("00:00:00")) {
@@ -50,10 +50,7 @@ public class HandleDataUtil {
                         for (String data1 : datas) {
                             if (data1.startsWith("-Dcatalina.home=")) {
                                 String[] data = data1.split("/");
-                                /*
-                                *get the project name of the tomcat deploying.
-                                * if has more than one project, spilt with "/"
-                                */
+
                                 value += data[data.length - 1] + "/";
                             }
                         }
